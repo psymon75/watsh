@@ -11,7 +11,7 @@ LDFLAGS = -lm -lrt
 #LDFLAGS += -fsanitize=undefined -fsanitize=thread
 
 OUTS = watsh
-OBJS_watsh = main.o
+OBJS_watsh = main.o alias.o
 OBJS = $(OBJS_watsh)
 
 DEPS = $(OBJS:.o=.d)
