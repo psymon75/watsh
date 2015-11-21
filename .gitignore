@@ -37,5 +37,6 @@
 # Editor backup files
 *~
 
-# The executable
+# The executables
 watsh
+tests
