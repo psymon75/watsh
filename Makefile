@@ -1,7 +1,7 @@
 CC = gcc
 CPP = cpp
-CFLAGS = -Wall -Wextra -pedantic --std=gnu99 -g -pthread
-LDFLAGS = -lpthread -lm -lrt
+CFLAGS = -Wall -Wextra -pedantic --std=gnu99 -g
+LDFLAGS = -lm -lrt
 
 #CC = clang
 #CFLAGS += -g -O0 -fno-omit-frame-pointer -fsanitize=address -fsanitize=leak -fsanitize=undefined
@@ -10,9 +10,9 @@ LDFLAGS = -lpthread -lm -lrt
 #CFLAGS += -g -O0 -fno-omit-frame-pointer -fsanitize=undefined -fsanitize=thread
 #LDFLAGS += -fsanitize=undefined -fsanitize=thread
 
-OUTS = convolution
-OBJS_convolution = convolution.o image.o main.o ppm.o
-OBJS = $(OBJS_convolution)
+OUTS = watsh
+OBJS_watsh = main.o
+OBJS = $(OBJS_watsh)
 
 DEPS = $(OBJS:.o=.d)
 
@@ -22,7 +22,7 @@ all: $(OUTS)
 
 -include $(DEPS)
 
-convolution: $(OBJS_convolution)
+watsh: $(OBJS_watsh)
 	$(CC) $^ -o $@ $(LDFLAGS)
 
 %.d: %.c
