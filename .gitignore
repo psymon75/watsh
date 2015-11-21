@@ -36,3 +36,6 @@
 
 # Editor backup files
 *~
+
+# The executable
+watsh
