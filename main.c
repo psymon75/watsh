@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 #include "alias.h"
+#include "builtins.h"
 #include "utils.h"
 
 int main(int argc, char *argv[]) {
