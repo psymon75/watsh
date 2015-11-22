@@ -3,13 +3,15 @@
 #include <unistd.h>
 
 #include "builtins.h"
+#include "errors.h"
 #include "utils.h"
 
-int builtin_cd(int argc, char *argv[]) {
+int builtin_cd(int stdout_fd, int stderr_fd, int argc, char *argv[]) {
   // TODO: implement 'cd -'
   // TODO: implement algorithm as decribed in man cd
+  UNUSED(stdout_fd);
   char *path;
-  int return_code;
+  int exit_status;
   if (argc < 2) {
     path = getenv("HOME");
   } else {
@@ -18,29 +20,29 @@ int builtin_cd(int argc, char *argv[]) {
   char *old_path = getcwd(NULL, 0);
   int chdir_return = chdir(path);
   if (chdir_return != 0) {
-    perror("watsh: cd");
-    return_code = 1;
+    perror_fd(stderr_fd, "watsh: cd");
+    exit_status = 1;
   } else {
     setenv("OLDPWD", old_path, 1);
     setenv("PWD", path, 1);
-    return_code = 0;
+    exit_status = 0;
   }
   free(old_path);
-  return return_code;
+  return exit_status;
 }
 
-int builtin_pwd(int argc, char *argv[]) {
+int builtin_pwd(int stdout_fd, int stderr_fd, int argc, char *argv[]) {
   UNUSED(argc);
   UNUSED(argv);
-  int return_code;
+  int exit_status;
   char *path = getcwd(NULL, 0);
   if (path == NULL) {
-    perror("watsh: pwd");
-    return_code = 1;
+    perror_fd(stderr_fd, "watsh: pwd");
+    exit_status = 1;
   } else {
-    printf("%s\n", path);
+    dprintf(stdout_fd, "%s\n", path);
     free(path);
-    return_code = 0;
+    exit_status = 0;
   }
-  return return_code;
+  return exit_status;
 }
