@@ -9,6 +9,8 @@ TEST builtin_cd_permission_denied(void) {
   char *new_path = getcwd(NULL, 0);
   ASSERT_EQ(1, cd_exit_status);
   ASSERT_STR_EQ(old_path, new_path);
+  free(old_path);
+  free(new_path);
   PASS();
 }
 
@@ -20,6 +22,8 @@ TEST builtin_cd_no_such_directory(void) {
   char *new_path = getcwd(NULL, 0);
   ASSERT_EQ(1, cd_exit_status);
   ASSERT_STR_EQ(old_path, new_path);
+  free(old_path);
+  free(new_path);
   PASS();
 }
 
@@ -31,6 +35,8 @@ TEST builtin_cd_dot(void) {
   char *new_path = getcwd(NULL, 0);
   ASSERT_EQ(0, cd_exit_status);
   ASSERT_STR_EQ(old_path, new_path);
+  free(old_path);
+  free(new_path);
   PASS();
 }
 
@@ -42,6 +48,8 @@ TEST builtin_cd_existing_directory(void) {
   char *new_path = getcwd(NULL, 0);
   ASSERT_EQ(0, cd_exit_status);
   ASSERT(strcmp(old_path, new_path) < 0);
+  free(old_path);
+  free(new_path);
   PASS();
 }
 
@@ -53,6 +61,8 @@ TEST builtin_cd_dotdot(void) {
   char *new_path = getcwd(NULL, 0);
   ASSERT_EQ(0, cd_exit_status);
   ASSERT(strcmp(old_path, new_path) > 0);
+  free(old_path);
+  free(new_path);
   PASS();
 }
 
