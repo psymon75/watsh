@@ -7,7 +7,6 @@
 
 void perror_fd(int fd, const char *s) {
   if (fd != -1) {
-    //perror(s);
     char *error_msg = strerror(errno);
     dprintf(fd, "%s: %s", s, error_msg);
   }
